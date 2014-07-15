@@ -4,10 +4,7 @@ public funtion db_init()
 	try
 	{
 		if(!file_exists('db_config.php'))
-		{
-			echo "Config file doesn't exist";
-			die();
-		}
+			die("Config file doesn't exist");
 		require_once('db_config.php');
 		if(!$port)
 			$db = new PDO('mysql:host='.$host.';dbname='.$name, $user, $pass);
@@ -17,8 +14,7 @@ public funtion db_init()
 	}
 	catch(Exception $e)
 	{
-		echo "Database Error";
-		die();
+		die("Database Error");
 	}
 }
 ?>
