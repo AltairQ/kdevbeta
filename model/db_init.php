@@ -1,5 +1,5 @@
 <?php
-function db_init()
+public funtion db_init()
 {
 	try
 	{
@@ -7,14 +7,14 @@ function db_init()
 			die("Config file doesn't exist");
 		require_once('db_config.php');
 		if(!$port)
-			$db = new PDO('mysql:host='.$host.';dbname='.$name, $user, $pass, array(PDO::ATTR_PERSISTENT => true, PDO::ERRMODE_EXCEPTION => true));
+			$db = new PDO('mysql:host='.$host.';dbname='.$name, $user, $pass);
 		else
-			$db = new PDO('mysql:host='.$host.';dbname='.$name.';port='.$port, $user, $pass, array(PDO::ATTR_PERSISTENT => true, PDO::ERRMODE_EXCEPTION => true));
+			$db = new PDO('mysql:host='.$host.';dbname='.$name.';port='.$port, $user, $pass);
+		return $db;
 	}
 	catch(Exception $e)
 	{
 		die("Database Error");
 	}
-	return $db;
 }
 ?>

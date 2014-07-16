@@ -1,7 +1,7 @@
 <?php
-$user=;
-$pass=;
-$host=;
-$name=;
-$port=null; //jeśli null, port pomijany
+$user=
+$pass=
+$host=
+$name=
+$port=null //jeśli null, port pomijany
 ?>
