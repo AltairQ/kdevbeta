@@ -1,4 +1,5 @@
 <?php
+//pobiera nazwę użytkownika i uchwyt do bazy, zwraca hash lub null
 function getUserHash($user=null, $db = null) // jeśli bardzo chcesz wszystko na globalu, to usuń
 {
 	if(!$user||!$db) return null;

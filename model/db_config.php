@@ -1,4 +1,5 @@
 <?php
+//tylko mysql
 $user=;
 $pass=;
 $host=;

@@ -1,4 +1,5 @@
 <?php
+//zwraca uchwt do bazy lub null
 function db_init()
 {
 	try
