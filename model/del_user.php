@@ -1,12 +1,14 @@
 <?php
 //Pobiera uchwyt i nazwę użytkownika, zwraca true (sukces) lub null
-function delUser($db, $user)
+function delUser($db, $username)
 {
-	if (!$db||!$user) return null;
+	if (!$db||!$username) return null;
+	$query = "DELETE FROM users WHERE user=:username;";
 	try
 	{
-		$num = $db->exec('DELETE FROM users WHERE user="'.$user.'"');
-		if($num==1)
+		$statement = $db->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+		$statement -> execute(array(':username'=>$username));
+		if($statement -> rowCount() ==1)
 			return true;
 		else
 			return null;
@@ -14,6 +16,10 @@ function delUser($db, $user)
 	catch (PDOException $e)
 	{
 		die("Database error");
+	}
+	catch (Exception $e)
+	{
+		die("Unable to delete user");
 	}
 }
 ?>

@@ -1,19 +1,23 @@
 <?php
 //pobiera nazwę użytkownika i uchwyt do bazy, zwraca hash lub null
-function getUserHash($user=null, $db = null) // jeśli bardzo chcesz wszystko na globalu, to usuń
+function getUserHash($db, $username) // jeśli bardzo chcesz wszystko na globalu, to usuń
 {
-	if(!$user||!$db) return null;
+	if(!$username||!$db) return null;
 	$hash=null;
+	$query="SELECT hash FROM users WHERE user=:username;";
 	try
 	{
-		$cursor = $db->query('SELECT hash FROM users WHERE user="'.$user.'"');
-		foreach($cursor as $row)
-			$hash = $row['hash'];
-		$cursor->closeCursor();
+		$cursor =  $db->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+		$cursor -> execute(array(':username'=>$username));
+		$hash = $cursor->fetch(PDO::FETCH_ASSOC)['hash'];
 	}
 	catch(PDOException $e)
 	{
-		die("Database error:");
+		die("Database error");
+	}
+	catch(Exception $e)
+	{
+		die("Unable to get hash");
 	}
 	return $hash;
 }
