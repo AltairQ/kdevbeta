@@ -1,7 +1,7 @@
 <?php
 function authcheck()
 {
-	return isset($_SESSION['login']);
+	return !empty($_SESSION['login']);
 }
 
 ?>

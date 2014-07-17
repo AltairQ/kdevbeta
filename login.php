@@ -1,6 +1,11 @@
 <?php
+require_once 'util/inc_all.php';
 
-require_once 'view/printheader.php';
+
+if (authcheck()) {
+	redirect("dashboard.php");
+}
+
 printheader();
 printnavbar();
 
