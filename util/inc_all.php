@@ -17,7 +17,7 @@ foreach (glob("view/*.php") as $filename)
 }
 
 
-$DB = db_init();
+$DB= db_create();
 
 
 ?>

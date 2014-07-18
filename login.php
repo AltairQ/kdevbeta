@@ -1,21 +1,28 @@
 <?php
-// require_once 'util/inc_all.php';
-foreach (glob("control/*.php") as $filename)
-{
-    require_once $filename;
-}
+require_once 'util/inc_all.php';
 
-foreach (glob("view/*.php") as $filename)
-{
-    require_once $filename;
-}
 
 if (authcheck()) {
 	redirect("dashboard.php");
 }
 
 if (isset($_POST['login']) && isset($_POST['password'])) {
-	die("k.");
+	if (
+		checkPassword
+		(
+			$DB, 
+			validate($_POST['login'], "login"), 
+			validate($_POST['password'], "password")
+			)
+		) 
+	{
+		$_SESSION['login']= validate($_POST['login'], "login");
+		redirect("dashboard.php");
+	}
+	else
+	{
+		die("hax.");
+	}
 }
 
 printheader();

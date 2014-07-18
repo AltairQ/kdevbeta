@@ -1,20 +1,17 @@
 <?php
 //zwraca uchwt do bazy lub null
-function db_init()
+function db_init($db_user, $db_pass, $db_host, $db_name, $db_port=null)
 {
 	try
 	{
-		if(!file_exists('model/db_config.php'))
-			die("Config file doesn't exist");
-		require_once('model/db_config.php');
-		if(!$port)
-			$db = new PDO('mysql:host='.$host.';dbname='.$name, $user, $pass, array(PDO::ATTR_PERSISTENT => true, PDO::ERRMODE_EXCEPTION => true));
+		if(empty($port))
+			$db = new PDO('mysql:host='.$db_host.';dbname='.$db_name, $db_user, $db_pass, array(PDO::ATTR_PERSISTENT => true, PDO::ERRMODE_EXCEPTION => true));
 		else
-			$db = new PDO('mysql:host='.$host.';dbname='.$name.';port='.$port, $user, $pass, array(PDO::ATTR_PERSISTENT => true, PDO::ERRMODE_EXCEPTION => true));
+			$db = new PDO('mysql:host='.$db_host.';dbname='.$db_name.';port='.$db_port, $db_user, $db_pass, array(PDO::ATTR_PERSISTENT => true, PDO::ERRMODE_EXCEPTION => true));
 	}
 	catch(Exception $e)
 	{
-		die("Database Error");
+		die("Database Error".$e->getMessage());
 	}
 	return $db;
 }
