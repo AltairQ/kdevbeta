@@ -1,13 +1,13 @@
 <?php
 //Pobiera uchwyt i dane, zwraca true (sukces) lub null
-function addUser($db, $username, $hash) //ew. inne, dunno na razie, $db -> uchwyt do bazy
+function addUser($db, $username, $password) //ew. inne, dunno na razie, $db -> uchwyt do bazy
 {
-	if (!($db&&$username&&$hash)) return null;
+	if (!($db&&$username&&$password)) return null;
 	$query = "INSERT INTO users VALUES(:username, :hash);";
 	try
 	{
 		$statement = $db->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-		$statement -> execute(array(':username'=>$username, ':hash' => $hash));
+		$statement -> execute(array(':username'=>$username, ':hash' => generate_hash($password)));
 		if($statement->rowCount()==1)
 			return true;
 		else

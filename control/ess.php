@@ -2,9 +2,9 @@
 
 session_start();
 
-function redirect($url='')
+function redirect($where='')
 {
-	header("Location: ".$_SERVER['HTTP_HOST']."/".$url);
+	header("Location: http://".$_SERVER['HTTP_HOST']."/".$where);
 }
 
 
