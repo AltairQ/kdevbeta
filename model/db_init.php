@@ -4,9 +4,9 @@ function db_init()
 {
 	try
 	{
-		if(!file_exists('db_config.php'))
+		if(!file_exists('model/db_config.php'))
 			die("Config file doesn't exist");
-		require_once('db_config.php');
+		require_once('model/db_config.php');
 		if(!$port)
 			$db = new PDO('mysql:host='.$host.';dbname='.$name, $user, $pass, array(PDO::ATTR_PERSISTENT => true, PDO::ERRMODE_EXCEPTION => true));
 		else
