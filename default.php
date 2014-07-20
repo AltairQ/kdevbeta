@@ -1,7 +1,7 @@
 <?php
 require_once 'util/inc_all.php';
 
-printheader('TEST');
+printheader('KNet');
 printnavbar();
 
 ?>
@@ -15,6 +15,7 @@ printnavbar();
         <p>
           <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
         </p>
+      </div>
       </div>
 
 <?php

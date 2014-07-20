@@ -25,7 +25,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
 	}
 }
 
-printheader();
+printheader("Log in");
 printnavbar();
 
 ?>

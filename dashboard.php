@@ -1,13 +1,29 @@
 <?php
 session_start();
-require_once 'control/authcheck.php';
-require_once 'control/ess.php';
+require_once 'util/inc_all.php';
 
 if (!authcheck()) {
 	redirect();
 }
 
-echo "logged in!";
+printheader('Dashboard');
+printnavbar();
 
+?>
+
+    <div class="container">
+
+    <div class="jumbotron">
+        <h1>Hi, <?php echo $_SESSION['login'] ?>!</h1>
+        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+        <p>To see the difference between static and fixed top navbars, just scroll.</p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
+        </p>
+      </div>
+
+<?php
+
+printjsend();
 
 ?>
