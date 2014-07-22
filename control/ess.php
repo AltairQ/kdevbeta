@@ -7,7 +7,4 @@ function redirect($where='')
 	header("Location: http://".$_SERVER['HTTP_HOST']."/".$where);
 }
 
-
-
-
 ?>
