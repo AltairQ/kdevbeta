@@ -6,6 +6,8 @@ if (authcheck()) {
 	redirect("dashboard.php");
 }
 
+$hax = false;
+
 if (isset($_POST['login']) && isset($_POST['password'])) {
 	if (
 		checkPassword
@@ -21,7 +23,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
 	}
 	else
 	{
-		die("hax.");
+		$hax = true;
 	}
 }
 
@@ -30,8 +32,17 @@ printnavbar();
 
 ?>
 <div class="container" style= "margin-top:30px">
+
+
 <div class="jumbotron" style="float:none; margin:0 auto;">
 <div style="margin: 0 auto; width:80%;">
+<?php if ($hax) {
+	?>
+<div class="alert alert-danger alert-error">
+<a href="#" class="close" data-dismiss="alert">&times;</a>
+<strong>Wrong login or password!</strong>	
+</div>
+<?php } ?>
 
 <form class="form-horizontal" method="post">
 <fieldset>
