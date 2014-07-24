@@ -17,9 +17,9 @@ public function newI($i, $EF, $rno)
 	}
 
 	if ($rno == 2) {
-		return 6;
+		return 6; //hym hym hym cośtam potem pogrzebiemy jak to za dużo
 	}
-	
+
 	return $i*$EF;
 }
 
