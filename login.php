@@ -31,6 +31,8 @@ printheader("Log in");
 printnavbar();
 
 ?>
+
+
 <div class="container" style= "margin-top:30px">
 
 
@@ -85,6 +87,10 @@ printnavbar();
 
 
 </div>
+
+<script type="text/javascript">
+document.getElementById("login").focus();
+</script>
 
 <?php
 

@@ -13,10 +13,16 @@ function printjsend()
 
 function printnavbar()
 {
-	$navbar = file_get_contents("templates/navbar.cpl");
-	echo $navbar;
+	if(!empty($_SESSION['login']))
+	{
+		echo str_replace("{{login}}", $_SESSION['login'], file_get_contents("templates/navbar_login.cpl")); //zaraz zmienię
+	}
+	else
+	{
+		echo file_get_contents("templates/navbar.cpl");
+	}
+	
 }
-
 
 
 ?>
