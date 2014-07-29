@@ -9,20 +9,18 @@ if (authcheck()) {
 $hax = false;
 
 if (isset($_POST['login']) && isset($_POST['password'])) {
-	if (
-		checkPassword
-		(
-			$DB, 
-			validate($_POST['login'], "login"), 
-			validate($_POST['password'], "password")
-			)
-		) 
+	$Plogin = validate($_POST['login'], "login");
+	$Ppass = validate($_POST['password'], "password");
+
+	if (checkPassword($DB, $Plogin, $Ppass)	) 
 	{
+		logEvent("Login \"$Plogin\" success");
 		$_SESSION['login']= validate($_POST['login'], "login");
 		redirect("dashboard.php");
 	}
 	else
 	{
+		logEvent("Login \"$Plogin\" fail!");
 		$hax = true;
 	}
 }

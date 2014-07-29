@@ -1,5 +1,28 @@
 <?php
 
+function getIP()
+{
+ if($_SERVER['HTTP_CLIENT_IP'])
+ {
+  $ip = $_SERVER['HTTP_CLIENT_IP'];
+ }
+ else if($_SERVER['HTTP_X_FORWARDED_FOR'])
+ {
+  $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+ }
+ else
+ {
+  $ip = $_SERVER['REMOTE_ADDR'];
+ }
+
+ return $ip;
+}
+
+
+function logEvent($event)
+{
+	file_put_contents("log.txt", "\n[".date("Y-m-d H:i:s:u")."] @ ".getIP()."\t".$event, FILE_APPEND | LOCK_EX);
+}
 
 function redirect($where='')
 {
