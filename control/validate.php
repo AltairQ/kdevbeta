@@ -10,6 +10,10 @@ function validate($string, $type)
 		case 'password':
 			$ret = urlencode($string);
 			break;
+		case 'email':
+			$ret = filter_var($string, FILTER_VALIDATE_EMAIL);
+			break;
+
 	}
 	return $ret;
 }

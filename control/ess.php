@@ -4,7 +4,15 @@
 function redirect($where='')
 {
 	header("Location: http://".$_SERVER['HTTP_HOST']."/".$where);
+	exit(0);
 }
+
+
+function redirectNoDie($where='')
+{
+	header("Location: http://".$_SERVER['HTTP_HOST']."/".$where);
+}
+
 
 function destroySession()
 {
