@@ -6,7 +6,7 @@ printnavbar();
 
 ?>
 
-    <div class="container">
+    <div class="container" style="margin-top:60px">
 
     <div class="jumbotron">
         <h1>KNet beta</h1>
