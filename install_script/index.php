@@ -67,17 +67,17 @@ if($_POST)
 		<h3>Creating config file...</h3>';
 
 		$dbinit = 
-"<?php
+'<?php
 function db_create()
 {
-$db_user='{{user}}';
-$db_pass='{{pass}}';
-$db_host='{{host}}';
-$db_name='{{name}}';
+$db_user=\'{{user}}\';
+$db_pass=\'{{pass}}\';
+$db_host=\'{{host}}\';
+$db_name=\'{{name}}\';
 $db_port= null;
 return db_init($db_user, $db_pass, $db_host, $db_name, $db_port);
 }
-?>";
+?>';
 
 	try
 	{
