@@ -65,36 +65,40 @@ if($_POST)
 	//db_config.php
 	echo '<li class="section_break">
 		<h3>Creating config file...</h3>';
+
+		$dbinit = 
+"<?php
+function db_create()
+{
+$db_user='{{user}}';
+$db_pass='{{pass}}';
+$db_host='{{host}}';
+$db_name='{{name}}';
+$db_port= null;
+return db_init($db_user, $db_pass, $db_host, $db_name, $db_port);
+}
+?>";
+
 	try
 	{
-		mkdir("./model");
-		$file=fopen("./model/db_config.php", "w");
-		fwrite($file, '<?php');
-		fwrite($file, "\n");
-		fwrite($file, '//tylko mysql');
-		fwrite($file, "\n");
-		fwrite($file, 'function db_create()');
-		fwrite($file, "\n");
-		fwrite($file, '{');
-		fwrite($file, "\n");
-		fwrite($file, '$db_user=\''.$_POST['login'].'\';');
-		fwrite($file, "\n");
-		fwrite($file, '$db_pass=\''.$_POST['password'].'\';');
-		fwrite($file, "\n");
-		fwrite($file, '$db_host=\''.$_POST['host'].'\';');
-		fwrite($file, "\n");
-		fwrite($file, '$db_name=\''.$_POST['name'].'\';');
-		fwrite($file, "\n");
-		if($_POST['port'])
-			fwrite($file, '$db_port=\''.$_POST['port'].'\';');
-		else
-			fwrite($file, '$db_port=null;');
-		fwrite($file, "\n");
-		fwrite($file, 'return db_init($db_user, $db_pass, $db_host, $db_name, $db_port);');
-		fwrite($file, "\n");
-		fwrite($file, '}');
-		fwrite($file, "\n");
-		fwrite($file, '?>');
+		if (empty($_POST['port'])) {
+
+		file_put_contents("../model/db_config.php", //nie jestem pewien CWD, trzeba sprawdzić
+			str_replace( 
+			array(     '{{user}}',      '{{pass}}',         '{{host}}',     '{{name}}'),
+			array($_POST['login'], $_POST['password'], $_POST['host'], $_POST['name']),
+			 $dbinit));
+	}
+	else
+	{
+		file_put_contents("../model/db_config.php", 
+			str_replace(
+			array(     '{{user}}',      '{{pass}}',         '{{host}}',     '{{name}}',       'null'),
+			array($_POST['login'], $_POST['password'], $_POST['host'], $_POST['name'], $_POST['port']),
+			 $dbinit));
+	}
+
+
 		echo ('<p>Done!</p>');
 	}
 	catch(Exception $e)
@@ -102,7 +106,7 @@ if($_POST)
 		echo('<p>'.$e->getMessage().'</p>');
 	}
 	echo '<li class="section_break">
-		<h3>SENK U VEDDY MUCH</h3>';
+		<h3>SENK U VEDDY MUCH MA FREND</h3>';
 	include("step2end.html");
 }
 else
