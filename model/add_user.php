@@ -15,7 +15,7 @@ function addUser($db, $username, $password) //ew. inne, dunno na razie, $db -> u
 	}
 
 
-	$query = "INSERT INTO users VALUES(:username, :hash);";
+	$query = "INSERT INTO `users` (username, hash) VALUES(:username, :hash);";
 	try
 	{
 		$statement = $db->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));

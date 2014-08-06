@@ -4,7 +4,7 @@ function getUserHash($db, $username) // jeśli bardzo chcesz wszystko na globalu
 {
 	if(!$username||!$db) return null;
 	$hash=null;
-	$query="SELECT hash FROM users WHERE user=:username;";
+	$query="SELECT `hash` FROM `users` WHERE username=:username;";
 	try
 	{
 		$cursor =  $db->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
