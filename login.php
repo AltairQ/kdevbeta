@@ -12,15 +12,16 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
 	$Plogin = validate($_POST['login'], "login");
 	$Ppass = validate($_POST['password'], "password");
 
-	if (checkPassword($DB, $Plogin, $Ppass)	) 
+	if (($userid = getUserIdByCred($DB, $Plogin, $Ppass)) >= 0) 
 	{
 		logEvent("Login \"$Plogin\" success");
 		$_SESSION['login']= validate($_POST['login'], "login");
+		$_SESSION['userid']= $userid;
 		redirect("dashboard.php");
 	}
 	else
 	{
-		logEvent("Login \"$Plogin\" fail!");
+		logEvent("Login \"$Plogin\" fail! $userid");
 		$hax = true;
 	}
 }

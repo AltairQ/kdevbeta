@@ -10,7 +10,7 @@ function addUser($db, $username, $password) //ew. inne, dunno na razie, $db -> u
 	if (!($db&&$username&&$password)) return 0;
 
 
-	if (checkUser($db, $username)) {
+	if (getUserId($db, $username) != -50) {
 		return -1;
 	}
 
