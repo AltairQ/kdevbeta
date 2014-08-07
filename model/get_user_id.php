@@ -1,9 +1,10 @@
 <?php
 
-function getUserId($db, $username) 
 // -100 = błąd wywołania
 // -50 = nie ma usera
 // >=0 = id usera
+
+function getUserId($db, $username) 
 {
 	if(!$username||!$db) return -100;
 	
