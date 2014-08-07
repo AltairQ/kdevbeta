@@ -11,14 +11,14 @@ printnavbar();
 
 ?>
 
-    <div class="container">
+    <div class="container" style= "margin-top:60px">
 
     <div class="jumbotron">
-        <h1>Hi, <?php echo $_SESSION['login'] ?>!</h1>
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
+        <h1>NO JAK TAM <?php echo $_SESSION['login'] ?>?</h1>
+        <h2>DZIEŃ DOBRY KUHWA</h2>
+       
         <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
+          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">Utwórz nową listę &raquo;</a>
         </p>
       </div>
 
