@@ -21,8 +21,8 @@ function createList($db, $userid)
 	catch(Exception $e)
 	{
 		echo $e->getMessage();
-		return 0;
+		return -100;
 	}
-	return 1;
+	return $listid;
 }
 ?>

@@ -58,7 +58,7 @@ else
       </div>
       <div class="modal-body">
         <form id="editmodalform">
-          <input name="lid" type="hidden" id="editmodallid" value="PHPHERE">
+          <input name="lid" type="hidden" id="editmodallid" value="<?php echo $_GET['id']; ?>">
           <input name="id" type="hidden" id="editmodalid">
           <input name="front" type="text" id="editmodalfront">
           <input name="back" type="text" id="editmodalback">
@@ -95,7 +95,7 @@ else
 
     <div class="jumbotron" id="loltab">
     <script type="text/javascript">
-xmlhttp.open("GET","show_list_edit.php",true);
+xmlhttp.open("GET","show_list_edit.php?lid=<?php echo $_GET['id']; ?>",true);
 xmlhttp.send();
 
     </script>
