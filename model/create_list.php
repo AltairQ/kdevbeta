@@ -16,7 +16,7 @@ function createList($db, $userid)
 		$db -> exec($create_query);
 		//dodaj do 'list2user'
 		$statement = $db->prepare($list2user_query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-		$statement -> execute(array(':list_id'=>$listid, ':user_id' => $userid, ":permission" => 1));
+		$statement -> execute(array(':list_id'=>$listid, ':user_id' => $userid, ":permission" => 2));
 	}
 	catch(Exception $e)
 	{
