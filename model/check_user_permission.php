@@ -1,6 +1,5 @@
 <?php
-//0 - błąd techniczny, 1 - może edytować, -1 - nie może edytować
-//permy 0 i 1
+//-1 - błąd techniczny, 2 - może edytować, 0 - nie może edytować
 function checkUserPermission($db, $listid, $userid)
 {
 	$user_query = "SELECT `permission` FROM `list2user` WHERE `user_id` = :user_id AND `list_id` = :list_id";
@@ -15,7 +14,7 @@ function checkUserPermission($db, $listid, $userid)
 	catch(Exception $e)
 	{
 		echo $e->getMessage();
-		return 0;
+		return -1;
 	}
 	if($response['permission'] == 1) return 1;
 	try
@@ -34,8 +33,8 @@ function checkUserPermission($db, $listid, $userid)
 	catch(Exception $e)
 	{
 		echo $e->getMessage();
-		return 0;
+		return -1;
 	}
-	return -1;
+	return 0;
 }
 ?>

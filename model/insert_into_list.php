@@ -14,7 +14,7 @@ function insertIntoList($db, $listid, $front="", $back="", $comment="")
 	catch(Exception $e)
 	{
 		echo $e->getMessage();
-		return 0;
+		return -1;
 	}
 	return 1;
 }
