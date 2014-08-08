@@ -1,5 +1,8 @@
 <?php
 require_once 'util/inc_all.php';
+if (authcheck()) {
+  redirect("dashboard.php");
+}
 
 printheader('KNet');
 printnavbar();
