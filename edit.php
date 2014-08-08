@@ -11,7 +11,26 @@ printnavbar();
 
 ?>
 
+<script type="text/javascript">
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
 
+  xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("loltab").innerHTML=xmlhttp.responseText;
+    }
+  }
+
+</script>
 
  <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -33,55 +52,12 @@ printnavbar();
 
     <div class="container" style= "margin-top:60px">
 
-    <div class="jumbotron">
-    <h2>Editing list TESTOPOLECA</h2>
-     
+    <div class="jumbotron" id="loltab">
+    <script type="text/javascript">
+xmlhttp.open("GET","show_list.php",true);
+xmlhttp.send();
 
-    <table class="table table-striped">
-
-        <thead><tr>
-               <th>Id</th>
-               <th>Question</th>
-               <th>Answer</th>
-               <th>Comment</th>
-
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-
-        for ($i=1; $i < 10; $i++) { 
-        	
-        
-        ?>
-            <tr>
-
-                <td>1</td>
-
-                <td>Jan Paweł II</td>
-
-                <td>Papież</td>
-
-                <td>PS to prawda</td>
-                <td>
-                <span class="glyphicon glyphicon-wrench" onClick="$('#myModal1').modal();"></span>
-                <span class="glyphicon glyphicon-remove" style="color: red;"></span>
-               
-                </td>
-
-            </tr>
-
-        <?php
-        }
-        
-        ?>
-
-        
-
-        </tbody>
-
-    </table>
-
+    </script>
 
       </div>
       </div>

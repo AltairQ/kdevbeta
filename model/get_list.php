@@ -2,9 +2,13 @@
 
 function getList($db, $listid, $userid)
 {
-	if (checkUserPermission($db, $listid, $userid) >= 0) {
-		
+	if (checkUserPermission($db, $listid, $userid)==0 ) {
+		redirect("");
 	}
+
+	
+
+
 }
 
 ?>

@@ -15,7 +15,7 @@ printnavbar();
 
     <div class="jumbotron">
         <h1>NO JAK TAM <?php echo $_SESSION['login'] ?>?</h1>
-        <h2>DZIEŃ DOBRY KUHWA</h2>
+        <h2>DZIEŃ DOBRY</h2>
        
         <p>
           <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">Utwórz nową listę &raquo;</a>
