@@ -4,7 +4,7 @@ require_once 'util/inc_all.php';
 if (!authcheck()) {
 	die();
 }
-var_dump($_GET);
+
 $Plid = filter_var($_GET['lid'], FILTER_SANITIZE_NUMBER_INT);
 $Pid = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
 
@@ -30,9 +30,12 @@ if (!empty($_GET['act']))
 
 echo rand();
 $res = getList($DB, $Plid, $_SESSION['id']);
-if (empty($res) || $res === -100) {
-    die("NOPE");
-}
+if ($res === -100) 
+    die("List does not exist");
+
+if (empty($res)) 
+    echo "Empty list.";
+
 ?>
 
 <h2>Editing list TESTOPOLECA</h2>
