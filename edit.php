@@ -40,9 +40,8 @@ else
   }
 
   function editModalApply() {
-    xmlhttp.open("POST","show_list_edit.php",true);
-    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    xmlhttp.send($("#editmodalform").serialize());
+    xmlhttp.open("GET", "show_list_edit.php?" + $("#editmodalform").serialize(),true);
+    xmlhttp.send();
     $("#editmodal").modal('hide');
     
   }
@@ -58,6 +57,7 @@ else
       </div>
       <div class="modal-body">
         <form id="editmodalform">
+          <input name="act" type="hidden" value="edit">
           <input name="lid" type="hidden" id="editmodallid" value="<?php echo $_GET['id']; ?>">
           <input name="id" type="hidden" id="editmodalid">
           <input name="front" type="text" id="editmodalfront">

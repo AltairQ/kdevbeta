@@ -4,8 +4,25 @@ require_once 'util/inc_all.php';
 if (!authcheck()) {
 	die();
 }
-
+var_dump($_GET);
 $Plid = filter_var($_GET['lid'], FILTER_SANITIZE_NUMBER_INT);
+$Pid = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
+
+
+if (!empty($_GET['act']))
+{
+   
+   if ($_GET['act'] == "edit")
+    {
+   // if (checkUserPermission($DB, $Plid, $_SESSION['id'])==2) 
+    {
+        editWord($DB, $Plid, $Pid, validate($_GET['front'], "login"), validate($_GET['back'], "login"), validate($_GET['comment'], "login"));
+    }
+       
+   }
+}
+
+
 
 // if (checkUserPermission($DB, )) {
 // 	# code...
