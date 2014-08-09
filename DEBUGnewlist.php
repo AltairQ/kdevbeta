@@ -6,7 +6,7 @@ if (!authcheck()) {
 	redirect("login.php");
 }
 
-$lid = createList($DB, $_SESSION['id']);
+$lid = createList($DB, $_SESSION['userid']);
 redirect("edit.php?id=$lid");
 
 ?>
