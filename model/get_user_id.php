@@ -6,18 +6,16 @@
 
 function getUserId($db, $username) 
 {
+
 	if(!$username||!$db) return -100;
 	
-	$query="SELECT id FROM users WHERE user=:username;";
+	$query="SELECT `id` FROM `users` WHERE `username`=:username;";
 	try
 	{
 		$cursor =  $db->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		$cursor -> execute(array(':username'=>$username));
-
-		if ($cursor->rowCount() != 1) {
-			return -50;
-		}
-		return $cursor->fetch(PDO::FETCH_ASSOC)['id'];;
+		$id = $cursor->fetch(PDO::FETCH_ASSOC)['id'];
+		if($id == null) return -50; else return $id;
 	}
 	catch(PDOException $e)
 	{
@@ -39,11 +37,8 @@ function getUserIdByCred($db, $username, $pass)
 	{
 		$cursor =  $db->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		$cursor -> execute(array(':username'=>$username, ':hash'=> crypt($pass, getUserHash($db, $username))));
-
-		if ($cursor->rowCount() != 1) {
-			return -50;
-		}
-		return $cursor->fetch(PDO::FETCH_ASSOC)['id'];;
+		$id = $cursor->fetch(PDO::FETCH_ASSOC)['id'];
+		if($id == null) return -50; else return $id;
 	}
 	catch(PDOException $e)
 	{
