@@ -28,18 +28,17 @@ printnavbar();
     
   }
 
-    function deleteModal (id, front, back, comment) {
-
-    $("#deletemodalid").val(id);
-    $("#deletemodalfront").val(front); 
-    $("#deletemodalback").val(back); 
-    $("#deletemodalcomment").val(comment);
-    $("#deletemodal").modal();    
-  }  
 
   function newModal () {
-    // body...
+    $("#newmodal").modal();  
   }
+
+  function newModalApply() {
+    $("#loltab").load("show_list_edit.php?" + $("#newmodalform").serialize());
+    $("#newmodal").modal('hide');
+    
+  }
+
 
 
 
@@ -96,13 +95,12 @@ printnavbar();
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">Add new</h4>
       </div>
       <div class="modal-body">
           <form id="newmodalform">
           <input name="act" type="hidden" value="new">
           <input name="lid" type="hidden" id="newmodallid" value="<?php echo $_GET['id']; ?>">
-          <input name="id" type="hidden" id="newmodalid">
           <input name="front" type="text" id="newmodalfront">
           <input name="back" type="text" id="newmodalback">
           <input name="comment" type="text" id="newmodalcomment">
@@ -110,7 +108,7 @@ printnavbar();
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="newModalApply()">Save changes</button>
+        <button type="button" class="btn btn-primary" onclick="newModalApply()">Add</button>
       </div>
     </div>
   </div>

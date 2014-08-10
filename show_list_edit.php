@@ -5,37 +5,44 @@ if (!authcheck()) {
 	die();
 }
 
-var_dump($_GET);
 
 $Plid = filter_var($_GET['lid'], FILTER_SANITIZE_NUMBER_INT);
 $Pid = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
 $noperm = false;
 
 
-if (!empty($_GET['act']))
+if (checkUserPermission($DB, $Plid, $_SESSION['userid'])!=2)
 {
+    ?>
+
+   <div class="alert alert-danger alert-error">
+<a href="#" class="close" data-dismiss="alert">&times;</a>
+<strong>Sorry my friend, no permissions to edit!</strong>   
+</div>
+
+    <?php
+    die();
+} 
+
    
    if ($_GET['act'] == "edit")
     {
-   if (checkUserPermission($DB, $Plid, $_SESSION['userid'])==2) 
-    {
         editWord($DB, $Plid, $Pid, validate($_GET['front'], "login"), validate($_GET['back'], "login"), validate($_GET['comment'], "login"));
+
     }
-    else
+   
+   if ($_GET['act'] == "new")
     {
-     $noperm = true;
-   }
+        addWord($DB, $Plid, validate($_GET['front'], "login"), validate($_GET['back'], "login"), validate($_GET['comment'], "login"));
+
     }
-}
+   
+   if ($_GET['act'] == "delete")
+    {
+        //editWord($DB, $Plid, $Pid, validate($_GET['front'], "login"), validate($_GET['back'], "login"), validate($_GET['comment'], "login"));
+        //bieda, ni ma
+    }
 
-
-
-// if (checkUserPermission($DB, )) {
-// 	# code...
-// }
-
-
-echo rand();
 $res = getList($DB, $Plid, $_SESSION['userid']);
 if ($res === -100) 
     die("List does not exist");
@@ -43,21 +50,9 @@ if ($res === -100)
 if (empty($res)) 
     echo "Empty list.";
 
-if ($noperm === true) { //czy to kiedykolwiek się przyda? dunno.
-    
-    ?>
-
-    <div class="alert alert-danger alert-error">
-<a href="#" class="close" data-dismiss="alert">&times;</a>
-<strong>Sorry my friend, no permissions to edit!</strong>   
-</div>
-    <?php
-
-}
-
 ?>
 
-<h2>Editing list TESTOPOLECA</h2>
+<h2>Editing list "<?php  echo getListName($DB, $Plid); ?>"</h2>
 
 
      
@@ -65,7 +60,7 @@ if ($noperm === true) { //czy to kiedykolwiek się przyda? dunno.
     <table class="table table-striped">
 
         <thead><tr>
-               <th>Id</th>
+              
                <th>Question</th>
                <th>Answer</th>
                <th>Comment</th>
@@ -81,7 +76,7 @@ if ($noperm === true) { //czy to kiedykolwiek się przyda? dunno.
         ?>
         <tr>
                
-                <td><?php echo $row['id'] ?></td>
+               
 
                 <td><?php echo $row['front'] ?></td>
 
