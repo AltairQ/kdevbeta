@@ -48,8 +48,7 @@ if (checkUserPermission($DB, $Plid, $_SESSION['userid'])!=2)
    
    if ($_GET['act'] == "delete")
     {
-        //editWord($DB, $Plid, $Pid, validate($_GET['front'], "login"), validate($_GET['back'], "login"), validate($_GET['comment'], "login"));
-        //bieda, ni ma
+        deleteWord($DB, $Plid, $Pid);
     }
 
 $res = getList($DB, $Plid, $_SESSION['userid']);

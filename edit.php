@@ -39,8 +39,19 @@ printnavbar();
     
   }
 
+    function deleteModal (id, front, back, comment) {
+
+    $("#deletemodalid").val(id);
+    $("#deletemodalwhat").html(front+" | "+back+" | "+comment); 
+    $("#deletemodal").modal();    
+  }
 
 
+  function deleteModalApply() {
+    $("#loltab").load("show_list_edit.php?" + $("#deletemodalform").serialize());
+    $("#deletemodal").modal('hide');
+    
+  }
 
 
 
@@ -80,6 +91,11 @@ printnavbar();
         <h4 class="modal-title" id="myModalLabel">Delete value</h4>
       </div>
       <div class="modal-body">
+      <form id="deletemodalform">
+          <input name="act" type="hidden" value="delete">
+          <input name="lid" type="hidden" id="deletemodallid" value="<?php echo $_GET['id']; ?>">
+          <input name="id" type="hidden" id="deletemodalid">
+      </form>
         <p id="deletemodalwhat"></p>
       </div>
       <div class="modal-footer">
