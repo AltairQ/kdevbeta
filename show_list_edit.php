@@ -5,7 +5,7 @@ if (!authcheck()) {
 	die();
 }
 
-if (empty($_GET['lid'])) {
+if ($_GET['lid'] == '') {
     ?>
     <div class="alert alert-danger alert-error">
 <a href="#" class="close" data-dismiss="alert">&times;</a>
@@ -63,7 +63,7 @@ if (empty($res))
 <h2>Editing list "<?php  echo getListName($DB, $Plid); ?>"</h2>
 
 
-     
+     <div class="table-responsive">
 
     <table class="table table-striped">
 
@@ -78,39 +78,28 @@ if (empty($res))
         <tbody>
         <?php
 
-        foreach ($res as $row) {
-               	
+        foreach ($res as $row) {              	
         
         ?>
         <tr>
-               
-               
-
                 <td><?php echo $row['front'] ?></td>
-
                 <td><?php echo $row['back'] ?></td>
-
                 <td><?php echo $row['comment'] ?></td>
                 <td>
                 <span class="glyphicon glyphicon-wrench" onClick="editModal('<?php echo $row['id'] ?>', '<?php echo $row['front'] ?>', '<?php echo $row['back'] ?>', '<?php echo $row['comment'] ?>')"></span>
                 <span class="glyphicon glyphicon-remove" onClick="deleteModal('<?php echo $row['id'] ?>', '<?php echo $row['front'] ?>', '<?php echo $row['back'] ?>', '<?php echo $row['comment'] ?>')"style="color: red;"></span>
-               
-                </td>
-               
+                </td>              
 
-            </tr> 
-           
+        </tr>            
 
         <?php
         }
         
-        ?>
-
-
-        
+        ?>       
 
         </tbody>
 
     </table>
+    </div>
    <button type="button" class="btn btn-success" onclick="newModal()">Add new ...</button>
 

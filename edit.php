@@ -36,6 +36,7 @@ printnavbar();
   function newModalApply() {
     $("#loltab").load("show_list_edit.php?" + $("#newmodalform").serialize());
     $("#newmodal").modal('hide');
+    $("#newmodalform").trigger('reset');
     
   }
 
