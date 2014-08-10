@@ -18,7 +18,7 @@ printnavbar();
         <h2>DZIEŃ DOBRY</h2>
        
         <p>
-          <a class="btn btn-lg btn-primary" href="edit.php" role="button">Utwórz nową listę &raquo;</a>
+          <a class="btn btn-lg btn-primary" href="newlist.php" role="button">Utwórz nową listę &raquo;</a>
         </p>
       </div>
 

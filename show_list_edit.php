@@ -5,6 +5,15 @@ if (!authcheck()) {
 	die();
 }
 
+if (empty($_GET['lid'])) {
+    ?>
+    <div class="alert alert-danger alert-error">
+<a href="#" class="close" data-dismiss="alert">&times;</a>
+<strong>Choose a list to edit...</strong>   
+</div>
+    <?php
+    die();
+}
 
 $Plid = filter_var($_GET['lid'], FILTER_SANITIZE_NUMBER_INT);
 $Pid = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
