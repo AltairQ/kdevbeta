@@ -12,23 +12,6 @@ printnavbar();
 ?>
 
 <script type="text/javascript">
-var xmlhttp;
-if (window.XMLHttpRequest)
-  {
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-
-  xmlhttp.onreadystatechange=function()
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-    document.getElementById("loltab").innerHTML=xmlhttp.responseText;
-    }
-  }
 
   function editModal (id, front, back, comment) {
 
@@ -40,11 +23,28 @@ else
   }
 
   function editModalApply() {
-    xmlhttp.open("GET", "show_list_edit.php?" + $("#editmodalform").serialize(),true);
-    xmlhttp.send();
+    $("#loltab").load("show_list_edit.php?" + $("#editmodalform").serialize());
     $("#editmodal").modal('hide');
     
   }
+
+    function deleteModal (id, front, back, comment) {
+
+    $("#deletemodalid").val(id);
+    $("#deletemodalfront").val(front); 
+    $("#deletemodalback").val(back); 
+    $("#deletemodalcomment").val(comment);
+    $("#deletemodal").modal();    
+  }  
+
+  function newModal () {
+    // body...
+  }
+
+
+
+
+
 
 </script>
 
@@ -66,14 +66,32 @@ else
         </form> 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="editModalApply()">Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Abort</button>
+        <button type="button" class="btn btn-primary" onclick="editModalApply()">Edit</button>
       </div>
     </div>
   </div>
 </div>
 
- <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Delete value</h4>
+      </div>
+      <div class="modal-body">
+        <p id="deletemodalwhat"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Abort</button>
+        <button type="button" class="btn btn-primary" onclick="deleteModalApply()">Delete</button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+ <div class="modal fade" id="newmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -81,11 +99,18 @@ else
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body">
-        ...
+          <form id="newmodalform">
+          <input name="act" type="hidden" value="new">
+          <input name="lid" type="hidden" id="newmodallid" value="<?php echo $_GET['id']; ?>">
+          <input name="id" type="hidden" id="newmodalid">
+          <input name="front" type="text" id="newmodalfront">
+          <input name="back" type="text" id="newmodalback">
+          <input name="comment" type="text" id="newmodalcomment">
+        </form> 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" onclick="newModalApply()">Save changes</button>
       </div>
     </div>
   </div>
@@ -95,8 +120,8 @@ else
 
     <div class="jumbotron" id="loltab">
     <script type="text/javascript">
-xmlhttp.open("GET","show_list_edit.php?lid=<?php echo $_GET['id']; ?>",true);
-xmlhttp.send();
+ $("#loltab").load("show_list_edit.php?lid=<?php echo $_GET['id']; ?>");
+
 
     </script>
 
