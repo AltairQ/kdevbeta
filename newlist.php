@@ -7,6 +7,7 @@ if (!authcheck()) {
 }
 
 $lid = createList($DB, $_SESSION['userid']);
+addListToRep($DB, $lid, $_SESSION['userid']);
 redirect("edit.php?id=$lid");
 
 ?>
