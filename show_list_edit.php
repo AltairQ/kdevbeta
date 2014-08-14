@@ -86,8 +86,8 @@ if (empty($res))
                 <td><?php echo $row['back'] ?></td>
                 <td><?php echo $row['comment'] ?></td>
                 <td>
-                <span class="glyphicon glyphicon-wrench" onClick="editModal('<?php echo $row['id'] ?>', '<?php echo $row['front'] ?>', '<?php echo $row['back'] ?>', '<?php echo $row['comment'] ?>')"></span>
-                <span class="glyphicon glyphicon-remove" onClick="deleteModal('<?php echo $row['id'] ?>', '<?php echo $row['front'] ?>', '<?php echo $row['back'] ?>', '<?php echo $row['comment'] ?>')"style="color: red;"></span>
+                <span class="glyphicon glyphicon-wrench" style="cursor: pointer;" onClick="editModal('<?php echo $row['id'] ?>', '<?php echo $row['front'] ?>', '<?php echo $row['back'] ?>', '<?php echo $row['comment'] ?>')"></span>
+                <span class="glyphicon glyphicon-remove" style="cursor: pointer; color: red;" onClick="deleteModal('<?php echo $row['id'] ?>', '<?php echo $row['front'] ?>', '<?php echo $row['back'] ?>', '<?php echo $row['comment'] ?>')" ></span>
                 </td>              
 
         </tr>            

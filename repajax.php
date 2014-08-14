@@ -5,60 +5,62 @@ if (!authcheck()) {
 	die();
 }
 
-if ($_GET['lid'] == '') {
-    ?>
-    <div class="alert alert-danger alert-error">
-<a href="#" class="close" data-dismiss="alert">&times;</a>
-<strong>Choose a list to edit...</strong>   
-</div>
-    <?php
-    die();
+$Plid = filter_var($_POST['lid'], FILTER_SANITIZE_NUMBER_INT);
+$Pid = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
+$userid = $_SESSION['userid'];
+$Pgrade = filter_var($_POST['grade'], FILTER_SANITIZE_NUMBER_INT);
+
+
+$action = $_POST['action'];
+
+if ($action == "getnew") {
+    $nextrep = getNewRep($DB, $userid);
+
+    if ($nextrep === -100) {
+           echo json_encode(array('code' => -100));
+           die();
+        }
+
+      if (empty($nextrep) ) {
+           echo json_encode(array('code' => 0));
+           die();
+        }
+
+    $word = getWord($DB, $nextrep['list_id'], $nextrep['word_id'], $userid);
+
+    if (empty($word) || $word == -100) {
+        echo json_encode(array('code' => -100));
+        die();
+    }
+
+
+    $ret = array('lid' => $nextrep['list_id'],
+                'id' => $nextrep['word_id'],
+                'front' => $word['front'],
+                'back' => $word['back'],
+                'code' => 1
+                );
+
+    echo json_encode($ret);
+
+
+    // https://www.youtube.com/watch?v=fU02v-3TSFw
+
+
 }
 
-$Plid = filter_var($_GET['lid'], FILTER_SANITIZE_NUMBER_INT);
-$Pid = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
-$noperm = false;
+if ($action == "answer") {
 
-
-if (checkUserPermission($DB, $Plid, $_SESSION['userid'])!=2)
-{
-    ?>
-
-   <div class="alert alert-danger alert-error">
-<a href="#" class="close" data-dismiss="alert">&times;</a>
-<strong>Sorry my friend, no permissions to edit!</strong>   
-</div>
-
-    <?php
-    die();
-} 
-
-   
-   if ($_GET['act'] == "edit")
-    {
-        editWord($DB, $Plid, $Pid, validate($_GET['front'], "login"), validate($_GET['back'], "login"), validate($_GET['comment'], "login"));
-
+    $row = getRep($DB, $userid, $Plid, $Pid);
+    if (empty($row) || $row == -100) {
+        //u f0k1n w0t m9
+        die();
     }
-   
-   if ($_GET['act'] == "new")
-    {
-        addWord($DB, $Plid, validate($_GET['front'], "login"), validate($_GET['back'], "login"), validate($_GET['comment'], "login"));
+    //dobra, zaraz to dokończę, to ten debil jeszcze wierci -_-
 
-    }
-   
-   if ($_GET['act'] == "delete")
-    {
-        deleteWord($DB, $Plid, $Pid);
-    }
+    // updateRep($DB, $userid, array('' => , ););
+}
 
-$res = getList($DB, $Plid, $_SESSION['userid']);
-if ($res === -100) 
-    die("List does not exist");
 
-if (empty($res)) 
-    echo "Empty list.";
 
 ?>
-
-<h2>Blah.</h2>
-

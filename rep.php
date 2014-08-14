@@ -6,15 +6,54 @@ if (!authcheck()) {
 	redirect();
 }
 
+
+if(updateRecalledWords($DB, $_SESSION['userid']) === -100)
+{
+  die();
+}
+
 printheader('Review');
 printnavbar();
+
+
 
 ?>
 
 <script type="text/javascript">
-function dosth () {
-$("#testid").html("done.");
-  }
+function showAnswer () {
+
+  $("#ansbox").html(window.back);
+}
+
+function getNextPair() {
+  $.post( "repajax.php", { action: "getnew" }, function( data ) {
+    window.lid = data.lid;
+    window.front = data.front;
+    window.back = data.back;
+    window.id = data.id;
+    window.front = data.front;
+
+console.log( window.lid );
+console.log( window.id );
+console.log( window.front);
+console.log( window.back );
+console.log( data.code );
+
+
+$("#quebox").html(window.front);
+$("#ansbox").html("Show answer");
+
+}, "json");
+}
+
+function answer(ansgrade) {
+  $.post( "repajax.php", { lid: window.lid,
+                           id: window.id,
+                           action: "answer",
+                           grade: ansgrade } );
+  getNextPair();
+
+}
 
 
 </script>
@@ -30,7 +69,7 @@ $("#testid").html("done.");
 
         <div class="panel panel-default" onclick="showAnswer()">
           <div class="panel-body" style="text-align: center; font-size:large;" id="ansbox" >
-            Answer
+            Show answer
           </div>
         </div>
 
@@ -56,6 +95,9 @@ $("#testid").html("done.");
         </div>
         </div>
       <!--   </div> -->
+      <script type="text/javascript">
+getNextPair();
+      </script>
       
   </div>
 </div>
