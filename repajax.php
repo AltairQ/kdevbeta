@@ -13,7 +13,53 @@ $Pgrade = filter_var($_POST['grade'], FILTER_SANITIZE_NUMBER_INT);
 
 $action = $_POST['action'];
 
-if ($action == "getnew") {
+if ($action == "getnew" || $action == "answer") {
+
+
+if ($action == "answer" && isset($Pid) && isset($Plid) && isset($Pgrade) ) {
+
+    $row = getRep($DB, $userid, $Plid, $Pid);
+    if (empty($row) || $row == -100) {
+        die();
+    }
+
+    if ($row['repid']==1) {
+        $row['ef'] = 2.5;
+    }
+    else
+    {
+        $row['ef'] = newEF($row['ef'], $Pgrade);    
+    }
+    
+
+    if ($Pgrade >= 4) {
+        $row['replen']= floor( newI($row['replen'], $row['ef'], $row['repid']));
+        $rlen = $row['replen'];
+
+        if ($row['repid'] == 1) {
+            $row['repnext'] = date('Y-m-d',  strtotime("+ $rlen day"));
+        }
+        else
+        {
+        $dtemp = strtotime($rlen."+ $rlen days"); //nie dziaua!
+        $row['repnext']=date('Y-m-d', $dtemp);
+        // GUUUUUUUUUUUUUHWAAAAAAAAAAAA
+
+        }
+
+        $row['repid']++;
+       
+       
+    }
+    updateRep($DB, $userid, $row);
+}
+
+
+
+
+//dopiero teraz pobieramy nowe
+
+
     $nextrep = getNewRep($DB, $userid);
 
     if ($nextrep === -100) {
@@ -47,18 +93,9 @@ if ($action == "getnew") {
     // https://www.youtube.com/watch?v=fU02v-3TSFw
 
 
-}
 
-if ($action == "answer") {
 
-    $row = getRep($DB, $userid, $Plid, $Pid);
-    if (empty($row) || $row == -100) {
-        //u f0k1n w0t m9
-        die();
-    }
-    //dobra, zaraz to dokończę, to ten debil jeszcze wierci -_-
 
-    // updateRep($DB, $userid, array('' => , ););
 }
 
 

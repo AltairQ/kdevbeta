@@ -18,6 +18,9 @@ printnavbar();
 
 
 ?>
+<div class="alert alert-info" id="nothingalert" style="display: none">
+<strong>No knowledge to repeat! <a href="dashboard.php">Click to go back</a></strong> 
+</div>
 
 <script type="text/javascript">
 function showAnswer () {
@@ -25,8 +28,8 @@ function showAnswer () {
   $("#ansbox").html(window.back);
 }
 
-function getNextPair() {
-  $.post( "repajax.php", { action: "getnew" }, function( data ) {
+function showData (data) {
+  
     window.lid = data.lid;
     window.front = data.front;
     window.back = data.back;
@@ -43,22 +46,55 @@ console.log( data.code );
 $("#quebox").html(window.front);
 $("#ansbox").html("Show answer");
 
+}
+
+function endStuff () {
+
+  $("#loltab").remove();
+  $("#nothingalert").detach().appendTo('#maincont');
+  $("#nothingalert").show();
+  
+}
+
+function getNextPair() {
+  $.post( "repajax.php", { action: "getnew" }, function( data ) {
+
+if (data.code == 0)
+ {
+  endStuff();
+ }
+ else if(data.code== 1)
+ {
+  showData(data);
+ }
+
 }, "json");
 }
+
 
 function answer(ansgrade) {
   $.post( "repajax.php", { lid: window.lid,
                            id: window.id,
                            action: "answer",
-                           grade: ansgrade } );
-  getNextPair();
+                           grade: ansgrade }, function( data ) {
+if (data.code == 0)
+ {
+  endStuff();
+ }
+ else if(data.code== 1)
+ {
+  showData(data);
+ }
 
+}, "json");
 }
+
+
 
 
 </script>
 
-<div class="container" style= "margin-top:60px;" >
+<div class="container" style= "margin-top:60px;" id="maincont" >
     <div class="jumbotron" id="loltab">
         
         <div class="panel panel-default">
@@ -100,6 +136,8 @@ getNextPair();
       </script>
       
   </div>
+</div>
+
 </div>
 <?php
 

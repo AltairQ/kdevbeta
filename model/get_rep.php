@@ -1,6 +1,6 @@
 <?php
 
-function getRep($db, $user, $lid, $id);
+function getRep($db, $user, $lid, $id)
 {
 	$list_query = "SELECT * FROM `r$user` WHERE `repnext` < '".date('Y-m-d', strtotime(' +1 day'))."' AND `word_id` = ? AND `list_id` = ? LIMIT 1";
 	
