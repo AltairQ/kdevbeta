@@ -41,10 +41,8 @@ if ($action == "answer" && isset($Pid) && isset($Plid) && isset($Pgrade) ) {
         }
         else
         {
-        $dtemp = strtotime($rlen."+ $rlen days"); //nie dziaua!
-        $row['repnext']=date('Y-m-d', $dtemp);
-        // GUUUUUUUUUUUUUHWAAAAAAAAAAAA
-
+        $dtemp= strtotime("+ $rlen days", strtotime($row['repnext']));
+        $row['repnext']=date("Y-m-d H:i:s", $dtemp);
         }
 
         $row['repid']++;
