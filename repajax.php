@@ -16,7 +16,7 @@ $action = $_POST['action'];
 if ($action == "getnew" || $action == "answer") {
 
 
-if ($action == "answer" && isset($Pid) && isset($Plid) && isset($Pgrade) && $Pgrade >= 0 $$ $Pgrade <= 5) {
+if ($action == "answer" && isset($Pid) && isset($Plid) && isset($Pgrade) && $Pgrade >= 0 && $Pgrade <= 5) {
 
     $row = getRep($DB, $userid, $Plid, $Pid);
     if (empty($row) || $row == -100) {
