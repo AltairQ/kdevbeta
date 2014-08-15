@@ -26,6 +26,7 @@ printnavbar();
 function showAnswer () {
 
   $("#ansbox").html(window.back);
+  $("#buttons").show();
 }
 
 function showData (data) {
@@ -36,15 +37,10 @@ function showData (data) {
     window.id = data.id;
     window.front = data.front;
 
-console.log( window.lid );
-console.log( window.id );
-console.log( window.front);
-console.log( window.back );
-console.log( data.code );
-
-
 $("#quebox").html(window.front);
 $("#ansbox").html("Show answer");
+$("#buttons").hide();
+
 
 }
 
@@ -95,7 +91,7 @@ if (data.code == 0)
 </script>
 
 <div class="container" style= "margin-top:60px;" id="maincont" >
-    <div class="jumbotron" id="loltab">
+    <div id="loltab">
         
         <div class="panel panel-default">
           <div class="panel-body" style="text-align: center; font-size:large;" id="quebox">
@@ -110,7 +106,7 @@ if (data.code == 0)
         </div>
 
         <!-- <div style="width: 200px; margin-left: auto; margin-right: auto;"> -->
-        <div class="btn-group btn-group-justified">
+        <div class="btn-group btn-group-justified" id="buttons">
         <div class="btn-group">
         <button type="button" onclick="answer(0)" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Complete blackout">0</button>
         </div>
