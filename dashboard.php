@@ -20,6 +20,15 @@ printnavbar();
         <p>
           <a class="btn btn-lg btn-primary" href="newlist.php" role="button">Utwórz nową listę &raquo;</a>
         </p>
+        
+        <p>
+          <a class="btn btn-lg btn-primary" href="rep.php" role="button">Powtórka &raquo;</a>
+        </p>
+        
+        <p>
+          <a class="btn btn-lg btn-primary" href="https://www.youtube.com/watch?v=fU02v-3TSFw" role="button">Papaj &raquo;</a>
+        </p>
+        
       </div>
 
 <?php

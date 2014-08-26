@@ -2,8 +2,12 @@
 
 function printheader($title='KNet')
 {
-$hdr= file_get_contents("templates/header.cpl");
-echo str_replace("{{title}}", $title, $hdr);
+
+if (date("d.m") == "14.11") {
+	$title = "Wszystkiego najlepszego!";
+}
+
+echo str_replace("{{title}}", $title, file_get_contents("templates/header.cpl"));
 }
 
 function printjsend()
