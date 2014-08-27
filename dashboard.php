@@ -7,16 +7,32 @@ if (!authcheck()) {
 }
 
 printheader('Dashboard');
-printnavbar();
-
+intprintnavbar($DB);
+updateRecalledWords($DB, $_SESSION['userid']);
 ?>
 
     <div class="container" style= "margin-top:60px">
 
     <div class="jumbotron">
-        <h1>NO JAK TAM <?php echo $_SESSION['login'] ?>?</h1>
-        <h2>DZIEŃ DOBRY</h2>
-       
+      <div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Joː lysts</h3>
+  </div>
+  <div class="panel-body">
+    <?php
+
+foreach(getListsOfUser($DB, $_SESSION['userid']) as $grp)
+{
+
+
+foreach ($grp['lists'] as $lst) {
+  echo "<p><a href=\"show.php?id=".$lst['id']."\" >".$lst['name']."</a></p>";
+}
+
+}
+    ?>
+  </div>
+</div>   
         <p>
           <a class="btn btn-lg btn-primary" href="newlist.php" role="button">Utwórz nową listę &raquo;</a>
         </p>
@@ -24,10 +40,10 @@ printnavbar();
         <p>
           <a class="btn btn-lg btn-primary" href="rep.php" role="button">Powtórka &raquo;</a>
         </p>
-        
-        <p>
-          <a class="btn btn-lg btn-primary" href="https://www.youtube.com/watch?v=fU02v-3TSFw" role="button">Papaj &raquo;</a>
-        </p>
+
+
+        <iframe width="640" height="360" src="//www.youtube.com/embed/ox3UExxm8is?rel=0&amp;autoplay=1#t=30" frameborder="0" allowfullscreen></iframe>
+     
         
       </div>
 

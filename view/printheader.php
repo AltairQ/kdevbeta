@@ -15,12 +15,34 @@ function printjsend()
 	echo file_get_contents("templates/jsend.cpl");
 }
 
-function printnavbar()
+
+function intprintnavbar($db)
 {
-	if(!empty($_SESSION['login']))
+	if (authcheck()) {
+		printnavbar(getRepCount($db, $_SESSION['userid']));
+		}
+		else
+		{
+			printnavbar();
+		}
+		
+}
+
+function printnavbar($rcount = 0)
+{
+	if(authcheck())
 	{
-		echo str_replace("{{login}}", $_SESSION['login'], file_get_contents("templates/navbar_login.cpl")); //zaraz zmienię
-	}
+		if ($rcount == 0) {
+			echo str_replace( array("{{login}}", "{{repcount}}"), array($_SESSION['login'], ""), file_get_contents("templates/navbar_login.cpl")); 
+
+		}
+		else
+		{
+			echo str_replace( array("{{login}}", "{{repcount}}"), array($_SESSION['login'], "<span class=\"badge\">$rcount</span>"), file_get_contents("templates/navbar_login.cpl")); 
+		}
+
+		
+		}
 	else
 	{
 		echo file_get_contents("templates/navbar.cpl");

@@ -11,6 +11,7 @@ printnavbar();
 
 ?>
 
+
 <script type="text/javascript">
 
   function editModal (id, front, back, comment) {
@@ -23,7 +24,9 @@ printnavbar();
   }
 
   function editModalApply() {
-    $("#loltab").load("show_list_edit.php?" + $("#editmodalform").serialize());
+    $.post( "show_list_edit.php", $("#editmodalform").serialize(), function( data ) {
+ $("#loltab").html(data);
+});
     $("#editmodal").modal('hide');
     
   }
@@ -34,7 +37,10 @@ printnavbar();
   }
 
   function newModalApply() {
-    $("#loltab").load("show_list_edit.php?" + $("#newmodalform").serialize());
+
+$.post( "show_list_edit.php", $("#newmodalform").serialize(), function( data ) {
+ $("#loltab").html(data);
+});
     $("#newmodal").modal('hide');
     $("#newmodalform").trigger('reset');
     
@@ -49,8 +55,15 @@ printnavbar();
 
 
   function deleteModalApply() {
-    $("#loltab").load("show_list_edit.php?" + $("#deletemodalform").serialize());
+
+    $.post( "show_list_edit.php", $("#deletemodalform").serialize(), function( data ) {
+ $("#loltab").html(data);
+});
+
     $("#deletemodal").modal('hide');
+
+
+
     
   }
 
@@ -131,11 +144,17 @@ printnavbar();
   </div>
 </div>
 
+
+
     <div class="container" style= "margin-top:60px">
 
     <div class="jumbotron" id="loltab">
     <script type="text/javascript">
- $("#loltab").load("show_list_edit.php?lid=<?php echo $_GET['id']; ?>");
+
+
+ $.post( "show_list_edit.php", { lid: <?php echo $_GET['id']; ?> }, function( data ) {
+ $("#loltab").html(data);
+});
 
 
     </script>

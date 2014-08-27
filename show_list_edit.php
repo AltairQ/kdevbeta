@@ -5,7 +5,21 @@ if (!authcheck()) {
 	die();
 }
 
-if ($_GET['lid'] == '') {
+
+if (!empty($_POST['pk'])) {
+    if (!empty($_POST['value'])) {
+        
+    
+    $pk =  filter_var($_POST['pk'], FILTER_SANITIZE_NUMBER_INT);
+    $val = validate($_POST['value'], "login");
+
+    if (checkUserPermission($DB, $pk, $_SESSION['userid'])==2) {
+        editListName($DB, $pk, $val);
+    }
+}
+}
+
+if ($_POST['lid'] == '') {
     ?>
     <div class="alert alert-danger alert-error">
 <a href="#" class="close" data-dismiss="alert">&times;</a>
@@ -15,8 +29,8 @@ if ($_GET['lid'] == '') {
     die();
 }
 
-$Plid = filter_var($_GET['lid'], FILTER_SANITIZE_NUMBER_INT);
-$Pid = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
+$Plid = filter_var($_POST['lid'], FILTER_SANITIZE_NUMBER_INT);
+$Pid = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
 $noperm = false;
 
 
@@ -34,19 +48,19 @@ if (checkUserPermission($DB, $Plid, $_SESSION['userid'])!=2)
 } 
 
    
-   if ($_GET['act'] == "edit")
+   if ($_POST['act'] == "edit")
     {
-        editWord($DB, $Plid, $Pid, validate($_GET['front'], "login"), validate($_GET['back'], "login"), validate($_GET['comment'], "login"));
+        editWord($DB, $Plid, $Pid, validate($_POST['front'], "login"), validate($_POST['back'], "login"), validate($_POST['comment'], "login"));
 
     }
    
-   if ($_GET['act'] == "new")
+   if ($_POST['act'] == "new")
     {
-        addWord($DB, $Plid, validate($_GET['front'], "login"), validate($_GET['back'], "login"), validate($_GET['comment'], "login"));
+        addWord($DB, $Plid, validate($_POST['front'], "login"), validate($_POST['back'], "login"), validate($_POST['comment'], "login"));
 
     }
    
-   if ($_GET['act'] == "delete")
+   if ($_POST['act'] == "delete")
     {
         deleteWord($DB, $Plid, $Pid);
     }
@@ -60,8 +74,14 @@ if (empty($res))
 
 ?>
 
-<h2>Editing list "<?php  echo getListName($DB, $Plid); ?>"</h2>
+<h2>Editing list "<a href="#" id="listname" data-type="text" data-pk="<?php  echo $Plid; ?>" data-url="/show_list_edit.php" ><?php  echo getListName($DB, $Plid); ?></a>"</h2>
 
+<script type="text/javascript">
+    $.fn.editable.defaults.mode = 'inline';
+    $(document).ready(function() {
+    $('#listname').editable();
+    });
+</script>
 
      <div class="table-responsive">
 
