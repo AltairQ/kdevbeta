@@ -29,7 +29,7 @@ function getListsOfUser($db, $userid)
 			array_push($finalarray, $temparray);
 		}
 	}
-	catch(Excaption $e)
+	catch(Exception $e)
 	{
 		echo $e->getMessage();
 		return -100;
