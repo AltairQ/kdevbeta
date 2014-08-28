@@ -11,7 +11,7 @@ if (!empty($_POST['pk'])) {
         
     
     $pk =  filter_var($_POST['pk'], FILTER_SANITIZE_NUMBER_INT);
-    $val = validate($_POST['value'], "login");
+    $val = validate(substr(trim($_POST['value']), 0, 40), "login");
 
     if (checkUserPermission($DB, $pk, $_SESSION['userid'])==2) {
         editListName($DB, $pk, $val);
