@@ -9,7 +9,7 @@ printnavbar();
 
 ?>
 
-    <div class="container" style="margin-top:60px">
+    <div class="container">
 
     <div class="jumbotron">
         <h1>KNet beta</h1>

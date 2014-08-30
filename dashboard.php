@@ -11,7 +11,7 @@ intprintnavbar($DB);
 updateRecalledWords($DB, $_SESSION['userid']);
 ?>
 
-    <div class="container" style= "margin-top:60px">
+    <div class="container">
 
     <div class="jumbotron">
       <div class="panel panel-default">

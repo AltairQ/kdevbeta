@@ -37,7 +37,7 @@ if (checkUserPermission($DB, $Plid, $_SESSION['userid']) < 1 )
 
 ?>
 
-    <div class="container" style= "margin-top:60px">
+    <div class="container">
 
     <div class="jumbotron" id="loltab">
 

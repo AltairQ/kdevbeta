@@ -146,7 +146,7 @@ $.post( "show_list_edit.php", $("#newmodalform").serialize(), function( data ) {
 
 
 
-    <div class="container" style= "margin-top:60px">
+    <div class="container">
 
     <div class="jumbotron" id="loltab">
     <script type="text/javascript">

@@ -90,7 +90,7 @@ if (data.code == 0)
 
 </script>
 
-<div class="container" style= "margin-top:60px;" id="maincont" >
+<div class="container" id="maincont" >
     <div id="loltab">
         
         <div class="panel panel-default">

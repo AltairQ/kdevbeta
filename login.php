@@ -32,7 +32,7 @@ printnavbar();
 ?>
 
 
-<div class="container" style= "margin-top:60px">
+<div class="container">
 
 
 <div class="jumbotron" style="float:none; margin:0 auto;">
