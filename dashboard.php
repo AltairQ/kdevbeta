@@ -42,7 +42,6 @@ foreach ($grp['lists'] as $lst) {
         </p>
 
 
-        <iframe width="640" height="360" src="//www.youtube.com/embed/ox3UExxm8is?rel=0&amp;autoplay=1#t=30" frameborder="0" allowfullscreen></iframe>
      
         
       </div>
